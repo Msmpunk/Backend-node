@@ -1,0 +1,21 @@
+{
+  "name": "mongo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Mario",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-promise-router": "^3.0.1",
+    "mongodb": "^2.2.35",
+    "mongoose": "^5.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
