@@ -1,10 +1,12 @@
-var express = require('express'),
+const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     Task = require('./api/models/users_model'),
+    Login = require('./api/models/login'),
     bodyParser = require('body-parser')
-    api_routes = require('./api/routes/users_routes');
+    api_routes = require('./api/routes/users_routes'),
+    session = require('express-session');
 
 // mongoose instance connection url connection
 
@@ -15,8 +17,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 
 app.use('/api/v1',api_routes);
+
+
 
 app.listen(port);
 

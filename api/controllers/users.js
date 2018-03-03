@@ -2,7 +2,7 @@
 
 
 const mongoose = require('mongoose'),
-      User = mongoose.model('Users');
+      User = mongoose.model('Login');
 
 exports.list_all_users = async (req, res) => {
   try{
