@@ -10,8 +10,6 @@ exports.authToken = async (req, res ,next) => {
 
     const result = await jwt.verify(token, SEED, (err, decoded) => {
 
-      console.log(err)
-
       if (err) {
         return res.status(401).json({
           ok: false,
