@@ -1,8 +1,8 @@
 const express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 4000,
     mongoose = require('mongoose'),
-    Task = require('./api/models/users_model'),
+    User = require('./api/models/user_model'),
     Login = require('./api/models/login'),
     bodyParser = require('body-parser')
     api_routes = require('./api/routes/users_routes'),

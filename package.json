@@ -15,8 +15,10 @@
     "express": "^4.16.2",
     "express-promise-router": "^3.0.1",
     "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.2.0",
     "mongodb": "^2.2.35",
-    "mongoose": "^5.0.7"
+    "mongoose": "^5.0.7",
+    "mongoose-unique-validator": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.1"

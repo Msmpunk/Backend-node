@@ -1,51 +1,57 @@
-'use strict';
-
+// 'use strict';
+//
 const mongoose = require('mongoose'),
-      Login = mongoose.model('Login'),
-      bcrypt = require('bcrypt');
-
-
+      User = mongoose.model('Users'),
+      bcrypt = require('bcrypt'),
+      jwt = require('jsonwebtoken'),
+      SEED = require('../config/config').SEED;
+//
+//
 exports.login = async (req, res) => {
   try{
+    const body = req.body;
 
-    if (req.body.password !== req.body.passwordConf) {
-      var err = new Error('Passwords do not match.');
-      err.status = 400;
-      res.send("passwords dont match");
-      return next(err);
-    }
+    const result = await User.findOne({ email: body.email }, (err , user) => {
 
-    const userData = {
-      
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      passwordConf: req.body.passwordConf,
+      if (err) {
+        return res.status(500).json({
+            ok: false,
+            mensaje: 'Error al buscar usuario',
+            errors: err
+        });
       }
 
-    const result = await Login.create(userData, (err, user) => {});
+      if(!user){
+        return res.status(400).json({
+          ok: false,
+          message: 'Credentials invalid - email',
+          err: err
+        });
+      }
 
-    return res.status(200).json({message: 'El usuario se ha  registrado.'});
+      if (!bcrypt.compareSync(body.password, user.password)) {
+          return res.status(400).json({
+              ok: false,
+              mensaje: 'Credenciales incorrectas - password',
+              err: err
+          });
+      }
+      user.password = ':)';
+
+      var token = jwt.sign({ user:user} , SEED , {expiresIn:14400});
+
+      res.status(400).json({
+        ok: true,
+        user: user,
+        token: token,
+        id: user._id,
+
+      });
+
+    })
+    return result;
 
   }catch(e){
-    return res.status(500).json({error: 'Ocurrio un error.'})
+    return res.status(500).json({error: 'There is a problem in the server'})
   }
 };
-
-exports.logout = async (req, res) => {
-  try{
-    if (req.session) {
-      const resultado = await req.session.destroy((err) => {});
-      return res.redirect('/');
-    }
-  }catch(e){
-    return res.status(500).json({error: 'Ocurrio un error.'})
-  }
-};
-//
-// router.get('/logout', function(req, res, next) {
-//   if(err) {
-//     return next(err);
-//   } else {
-//   }
-// });
