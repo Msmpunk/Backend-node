@@ -4,6 +4,7 @@ const mongoose = require('mongoose'),
       bcrypt = require('bcrypt');
 
 exports.list_all_users = async (req, res) => {
+  console.log("Peticion Realizada")
   try{
     const users = await User.find( {} , 'name email img role ')
     .exec((err, user) => {
@@ -40,6 +41,7 @@ exports.crete_user = async (req, res) => {
       role: body.role
     });
     // const user = new User(req.body);
+    console.log(user.password)
     const result = await user.save((err, saveUser) => {
 
       if (err) {
