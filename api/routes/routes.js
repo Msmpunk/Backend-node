@@ -5,8 +5,8 @@ const express = require('express'),
       mdAuthToken = require('../middlewares/auth-token');
 
 
-const usersController = require('../controllers/users');
-const loginController = require('../controllers/login');
+const usersController = require('../controllers/users'),
+      loginController = require('../controllers/login');
 
 
   // User Routes

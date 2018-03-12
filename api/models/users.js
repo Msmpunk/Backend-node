@@ -12,12 +12,25 @@ var rolesValidos = {
 var UsersSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Enter the name of the user in order to continue']
+    required: [true, 'Name is necesary']
+  },
+  last_name: {
+    type: String,
+    required: [true, 'last_name is necesary']
+  },
+  age: {
+    type: String,
+    // required: [true, 'Age is necesary']
   },
   email: {
     type: String,
     unique: true,
     required: [true, 'Email is necesary']
+  },
+  telefon: {
+    type: String,
+    unique: false,
+    // required: [true, 'Telefon is necesary']
   },
   password: {
     type: String,

@@ -4,9 +4,9 @@ const mongoose = require('mongoose'),
       bcrypt = require('bcrypt');
 
 exports.list_all_users = async (req, res) => {
-  console.log("Peticion Realizada")
+  console.log("Peticion Realizada[--->]")
   try{
-    const users = await User.find( {} , 'name email img role ')
+    const users = await User.find( {} , '_id name email last_name age telefon img role ')
     .exec((err, user) => {
       if (err) {
         return res.status(400).json({
@@ -31,15 +31,20 @@ exports.list_all_users = async (req, res) => {
 };
 
 exports.crete_user = async (req, res) => {
+  console.log("Peticion Realizada[--->]")
   try{
     const body = req.body;
     const user = new User({
       name: body.name,
+      last_name: body.last_name,
       email: body.email,
+      age: body.age,
+      telefon: body.telefon,
       password: bcrypt.hashSync(body.password, 10),
       img: body.img,
       role: body.role
     });
+    console.log(req.body)
     // const user = new User(req.body);
     console.log(user.password)
     const result = await user.save((err, saveUser) => {
@@ -87,6 +92,7 @@ exports.crete_user = async (req, res) => {
 
 
 exports.update_user = async (req, res) => {
+  console.log("Peticion Realizada[--->]")
   try{
 
     const id = req.params.userId,
@@ -136,6 +142,7 @@ exports.update_user = async (req, res) => {
 
 //
 exports.delete_user =  async (req, res) => {
+  console.log("Peticion Realizada[--->]")
   try{
 
     const deleteUser = User.findByIdAndRemove({_id: req.params.userId }, (err, user) => {
