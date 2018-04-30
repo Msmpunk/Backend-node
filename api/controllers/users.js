@@ -28,6 +28,7 @@ exports.list_all_users = async (req, res) => {
         mensaje: 'There was an error, please try again later',
     });
     }
+  console.log("Peticion Terminada[<---]")
 };
 
 exports.crete_user = async (req, res) => {
@@ -71,6 +72,7 @@ exports.crete_user = async (req, res) => {
         message: 'There was an error, please try again later',
     });
   }
+
 };
 
 
