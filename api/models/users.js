@@ -18,19 +18,10 @@ var UsersSchema = new Schema({
     type: String,
     required: [true, 'last_name is necesary']
   },
-  age: {
-    type: String,
-    // required: [true, 'Age is necesary']
-  },
   email: {
     type: String,
     unique: true,
     required: [true, 'Email is necesary']
-  },
-  telefon: {
-    type: String,
-    unique: false,
-    // required: [true, 'Telefon is necesary']
   },
   password: {
     type: String,

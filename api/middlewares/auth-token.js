@@ -8,7 +8,7 @@ exports.authToken = async (req, res ,next) => {
 
     const token = req.query.token;
 
-    const result = await jwt.verify(token, SEED, (err, decoded) => {
+    jwt.verify(token, SEED, (err, decoded) => {
 
       if (err) {
         return res.status(401).json({
@@ -17,16 +17,9 @@ exports.authToken = async (req, res ,next) => {
           error: err
         });
       }
-
       req.user = decoded.user;
-      next();
-
-
+      return  next();
     });
-
-    return result;
-
-
   }catch(e){
     return res.status(500).json({error: 'There is a problem in the server'})
   }
